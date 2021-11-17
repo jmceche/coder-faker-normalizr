@@ -1,0 +1,99 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  padding: 1rem;
+}
+
+.product-form, .product-list, .chat {
+  margin: 1rem auto;
+}
+
+.form-input {
+  display: flex;
+  flex-direction: column;
+  max-width: 350px;
+  margin: .5rem 0;
+}
+
+.form-input > input {
+  height: 2rem;
+}
+
+.product-form button, .chat button {
+  background: cadetblue;
+  border: none;
+  color: #FAFAFA;
+  font-weight: bold;
+  padding: .5rem;
+  border-radius: 3px;
+}
+
+.product-list h1 {
+  margin-bottom: 1rem;
+}
+
+.product-list h2 {
+  margin-top: 2rem;
+}
+
+img.icon {
+  width: 50px;
+  height: 50px;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+td,th {
+  padding: 1rem;
+  height: 2rem;
+  border: 1px solid #ccc;
+  text-align: center;
+}
+
+th {
+  background: lightblue;
+  border-color: white;
+  color: #FAFAFA;
+}
+
+.chat {
+  background-color: #CACACA;
+  border-radius: 6px;
+  padding: 1rem .5rem;
+}
+
+.chat h1 {
+  text-align: center;
+}
+
+#chat-msgs {
+  background-color: #FAFAFA;
+}
+
+.chat p {
+  margin: .2rem auto;
+}
+
+.chat span.user {
+  font-weight: 700;
+  color: blue;
+}
+
+.chat span.my-user {
+  font-weight: 700;
+  color: red;
+}
+.chat span.timestamp {
+  color: brown;
+}
+.chat span.user-msg {
+  color: green;
+  font-style: italic;
+}

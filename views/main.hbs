@@ -1,0 +1,57 @@
+{{!-- main.hbs --}}
+<main>
+  <section class="product-form">
+  <h1>Ingrese Producto</h1>
+  <form class="product-form" onsubmit="return submitProduct(event)" method="POST">
+    <div class="form-input">
+      <label for="title">Nombre</label>
+      <input type="text" id="title" name="title">
+    </div>
+    <div class="form-input">
+      <label for="price">Precio</label>
+      <input type="number" id="price" name="price">
+    </div>
+    <div class="form-input">
+      <label for="thumbnail">Foto URL</label>
+      <input type="text" id="thumbnail" name="thumbnail">
+    </div>
+    <button type="submit">Enviar</button>
+  </form>
+  </section>
+  <hr>
+  <section class="product-list">
+    <table>
+      <thead>
+        <th>Nombre</th>
+        <th>Precio</th>
+        <th>Foto</th>
+      </thead>
+      <tbody id="table-body">
+        {{#each products}}
+        <tr>
+          <td>{{this.title}}</td>
+          <td>${{this.price}}</td>
+          <td><img class="icon" src={{this.thumbnail}} alt="test"></td>
+        </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </section>
+  <hr>
+  <section class="chat">
+    <h1>Centro de Mensajes</h1>
+      <div id="chat-msgs"></div>
+    <form onsubmit="return sendMsg(event)" class="chat-form">
+      <div class="form-input">
+        <input type="email" name="email" id="email" placeholder="email@email.com" required>
+        <input type="text" name="nombre" id="nombre" placeholder="Nombre" required>
+        <input type="text" name="apellid" id="apellid" placeholder="Apellido" required>
+        <input type="number" name="edad" id="edad" placeholder="Edad" required>
+        <input type="text" name="alias" id="alias" placeholder="Alias" required>
+        <input type="text" name="avatar" id="avatar" placeholder="Avatar" required>
+        <textarea rows="5" cols="20" name="text" id="text">Mensaje...</textarea>
+      </div>
+      <button type="submit">Enviar</button>
+    </form>
+  </section>
+</main>
