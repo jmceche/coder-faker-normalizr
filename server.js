@@ -78,11 +78,8 @@ import {normalizeChat, print} from './helpers/normalize.js';
 const norm = async () => {
   const mongoData = await mongo.findAll();
   const formattedData = {id: "mensajes", mensajes: mongoData}
-  console.log(mongoData);
-  // const chat = normalizeChat({ id: "mensajes", mensajes: mongoData });
-  const chat = normalizeChat(formattedData);
-  // console.log(chat); 
-  // print(chat)
+  const chat = normalizeChat(JSON.stringify(formattedData));
+  console.log(chat); 
   return chat;
 }
   

@@ -7,19 +7,20 @@ export const print = (objeto) => {
 
 const author = new schema.Entity('authors', { }, {
   idAttribute: 'email'
-  // idAttribute: (value, parent,key) => (`${value}-${parent}-${key}`)
 });
 
 const post = new schema.Entity('posts', {
   author,
-});
+}, {idAttribute: '_id'});
 
 const chat = new schema.Entity('chats', {
   mensajes: [post],
 })
 
 export const normalizeChat = (data) => {
-  return normalize(data, chat);
+  const jsonData = JSON.parse(data);
+  const normData = normalize(jsonData, chat);
+  return normData;
 };
 
 export const denormalizeChat = (data) => {
