@@ -73,13 +73,11 @@ httpServer.listen(port, () => {
   console.log(`Server running on port ${port}`);
 })
 
-import {normalizeChat, print} from './helpers/normalize.js';
+import { normalizeChat, print } from './helpers/normalize.js';
 
 const norm = async () => {
   const mongoData = await mongo.findAll();
   const formattedData = {id: "mensajes", mensajes: mongoData}
   const chat = normalizeChat(JSON.stringify(formattedData));
-  console.log(chat); 
   return chat;
 }
-  

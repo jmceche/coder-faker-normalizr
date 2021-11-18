@@ -1,4 +1,3 @@
-
 const socket = io();
 
 socket.on('render_messages', data => {
@@ -32,10 +31,28 @@ const sendMsg = (e) => {
   socket.emit('send_message', msg)
 }
 
+
 const renderMessages = (data) => {
+  const author = new normalizr.schema.Entity('authors', {}, {
+    idAttribute: 'email'
+  });
+
+  const post = new normalizr.schema.Entity('posts', {
+    author,
+  }, {idAttribute: '_id'});
+
+  const chat = new normalizr.schema.Entity('chats', {
+    mensajes: [post],
+  })
+
+  const denormalizedData = normalizr.denormalize(data.result, chat, data.entities);
+  const { mensajes } = denormalizedData;
   console.log(data);
-  // let html = data.entities.chats.map(item => `<p><span class="">${item.author.alias}</span> <span class="timestamp">[${item.timestamp}]</span>: <span class="user-msg">${item.text}</span></p>`);
-  // let html = `<p>${data.entities}</p>`
-  // const body = document.querySelector('#chat-msgs')
-  // body.innerHTML = html//.join("");
+  const rate = JSON.stringify(data).length / JSON.stringify(denormalizedData).length;
+
+  let html = mensajes.map(item => `<p><span class="">${item.author.alias}</span> <span class="timestamp">[${item.createdAt}]</span>: <span class="user-msg">${item.text}</span></p>`);
+  const body = document.querySelector('#chat-msgs');
+  body.innerHTML = html.join("");
+  const h3 = document.querySelector('#compresion-rate');
+  h3.textContent = `Compresión: ${rate.toFixed(2)*100}%`;
 }

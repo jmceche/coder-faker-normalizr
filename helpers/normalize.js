@@ -11,7 +11,7 @@ const author = new schema.Entity('authors', { }, {
 
 const post = new schema.Entity('posts', {
   author,
-}, {idAttribute: '_id'});
+}, { idAttribute: '_id' });
 
 const chat = new schema.Entity('chats', {
   mensajes: [post],
@@ -20,9 +20,11 @@ const chat = new schema.Entity('chats', {
 export const normalizeChat = (data) => {
   const jsonData = JSON.parse(data);
   const normData = normalize(jsonData, chat);
+  console.log("norma", JSON.stringify(normData).length);
+  console.log("denorm", JSON.stringify(denormalizeChat(normData)).length);
   return normData;
 };
 
 export const denormalizeChat = (data) => {
-  return denormalize(data, chat, data);
+  return denormalize(data.result, chat, data.entities);
 };
