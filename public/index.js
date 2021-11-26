@@ -8,9 +8,11 @@ socket.on('render_messages', data => {
 const submitProduct = (e) => {
   e.preventDefault()
   const product = {
-      title: document.querySelector('#title').value,
-      price: document.querySelector('#price').value,
+    name: document.querySelector('#name').value,
+    price: document.querySelector('#price').value,
+    thumbnail: document.querySelector("#thumbnail").value
   }
+  console.log(product);
   socket.emit('submit_product', product);
 }
 

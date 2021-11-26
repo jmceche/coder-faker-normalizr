@@ -9,6 +9,46 @@ body {
   padding: 1rem;
 }
 
+.login-status {
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem 1rem;
+  background-color: aquamarine;
+  border-radius: 4px;
+}
+
+.login-status a {
+  text-decoration: none;
+  background-color: yellowgreen;
+  border: none;
+  border-radius: 4px;
+  padding: .5rem;
+}
+
+.login-container {
+  margin: 0 auto;
+  max-width: 500px;
+  background-color: lightblue;
+  padding: 1rem;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  margin: 2rem auto;
+}
+
+.login-form input{
+  border-radius: 4px;
+  margin: .5rem 0 1rem;
+  border: 1px solid gray;
+  font-size: 2rem;
+}
+
+.login-form button{
+  width: fit-content;
+}
+
 .product-form, .product-list, .chat {
   margin: 1rem auto;
 }
@@ -24,7 +64,7 @@ body {
   height: 2rem;
 }
 
-.product-form button, .chat button {
+.product-form button, .chat button, .button {
   background: cadetblue;
   border: none;
   color: #FAFAFA;

@@ -1,8 +1,6 @@
-import message from "./models/message.js"
-
 export default class Contenedor {
-  constructor() {
-    this.collection = message;
+  constructor(collection) {
+    this.collection = collection;
   }
 
   async findAll() {
@@ -27,6 +25,7 @@ export default class Contenedor {
       const data = await newItem.save();
       return {status: "success", data};
     } catch (error) {
+      console.log(error);
       throw new Error(`Error al guardar: ${error}`)
     }
   }

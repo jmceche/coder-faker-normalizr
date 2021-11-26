@@ -1,11 +1,20 @@
 {{!-- main.hbs --}}
 <main>
+  <section class="login-status">
+  {{#if user}}
+    <h2>Bienvenido {{user}}</h2>
+    <a href="/logout">Deslogear</a>
+  {{else}}
+  <a href="/login">Logearse</a>
+  {{/if}}
+  </section>
+
   <section class="product-form">
   <h1>Ingrese Producto</h1>
   <form class="product-form" onsubmit="return submitProduct(event)" method="POST">
     <div class="form-input">
-      <label for="title">Nombre</label>
-      <input type="text" id="title" name="title">
+      <label for="name">Nombre</label>
+      <input type="text" id="name" name="name">
     </div>
     <div class="form-input">
       <label for="price">Precio</label>
@@ -29,7 +38,7 @@
       <tbody id="table-body">
         {{#each products}}
         <tr>
-          <td>{{this.title}}</td>
+          <td>{{this.name}}</td>
           <td>${{this.price}}</td>
           <td><img class="icon" src={{this.thumbnail}} alt="test"></td>
         </tr>
