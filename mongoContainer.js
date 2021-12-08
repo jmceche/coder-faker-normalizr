@@ -19,6 +19,14 @@ export default class Contenedor {
     }
   }
 
+  async findByKey(key) {
+    try {
+      return await this.collection.findOne(key);
+    } catch (error) {
+      throw new Error(`Error al buscar user: ${error}`) 
+    }
+  }
+
   async create(item) {
     try {
       const newItem = new this.collection(item)
