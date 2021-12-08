@@ -12,8 +12,7 @@ dotenv.config()
 
 import router from "./routes/index.js";
 import testRouter from "./routes/testRoute.js";
-import { Contenedor } from "./contenedor.js";
-import sqliteOpt from './options/sqlite.js';
+import authRoute from "./routes/authRoute.js";
 
 import message from "./models/message.js"
 
@@ -29,7 +28,6 @@ const app = express();
 const httpServer = new HttpServer(app);
 const io = new IOServer(httpServer)
 
-const sqlite = new Contenedor(sqliteOpt, 'chat')
 const mongo = new mongoContainer(message);
 
 // connect to mongodb atlas
@@ -49,33 +47,12 @@ useMiddlewares(app)
 // routes
 app.use("/api/productos", router);
 app.use("/api/productos-test", testRouter)
+app.use("/", authRoute)
 
-app.get("/login", (req, res) => {
-    res.render("login")
-});
-
-app.post("/login", (req, res) => {
-  const { username } = req.body;
-  req.session.user = username;
-  res.redirect("/")
-})
-
-app.get("/logout",  (req, res) => {
-  res.render("logout", { user: req.session.user })
-  setTimeout( () => {
-     req.session.destroy((err) => {
-      if (err) {
-        return res.json({status: "logout error", body: err})
-      } else {
-        res.redirect("/")
-      }
-    });
-  }, 5000)
-});
-
-app.get("/", authMiddleware, async (req, res) => {
+app.get("/", async (req, res) => {
   const products = await axios.get("http://localhost:3000/api/productos");
-  res.render("main", { products: products.data, user: req.session.user });
+  console.log(req.user)
+  res.render("main", { products: products.data, user: req.user.username });
 })
 
 
@@ -100,6 +77,7 @@ httpServer.listen(port, () => {
 })
 
 import { normalizeChat, print } from './helpers/normalize.js';
+import { log } from 'console';
 
 const norm = async () => {
   const mongoData = await mongo.findAll();
